@@ -1,7 +1,7 @@
 /**
- * Receptor de la web de la Asamblea Tomás Bretón: reservas de productos y
- * avisos de "quiero ayudar". Nada de pagos: la asamblea contacta después
- * con cada persona.
+ * Receptor de la web de la Asamblea Tomás Bretón: un solo formulario de
+ * apoyo (productos y/o donativo). La asamblea contacta después con cada
+ * persona para concretar.
  *
  * PUESTA EN MARCHA (5 pasos):
  * 1. Entra en https://sheets.new con la cuenta asambleatomasbreton@gmail.com
@@ -14,15 +14,15 @@
  *    Ejecutar como: "Yo". Acceso: "Cualquier persona".
  * 4. Copia la URL que termina en /exec y pégala en assets/config.js
  *    como valor de pedidosEndpoint.
- * 5. Haz una reserva de prueba y borra la fila de prueba de la hoja.
+ * 5. Haz una solicitud de prueba y borra la fila de prueba de la hoja.
  *
- * Cada envío válido se guarda en la hoja "Pedidos" (pestaña Reservas o
- * Ayuda) y se avisa por correo a la asamblea. Las reservas reciben además
- * una confirmación automática en su correo.
+ * Cada envío válido se guarda en la hoja "Pedidos" (pestaña Solicitudes)
+ * y se avisa por correo a la asamblea. La persona recibe además una
+ * confirmación automática en su correo.
  *
  * Protecciones incluidas (la URL es pública, así que el servidor valida):
- * - Solo acepta los tipos "reserva" y "quiero-ayudar", con campos válidos.
- * - Limita el tamaño de cada texto y el número de líneas de pedido.
+ * - Solo acepta el tipo "apoyo", con campos válidos.
+ * - Limita el tamaño de cada texto y el número de líneas.
  * - Campo trampa ("empresa"): si viene relleno, es un robot; se descarta
  *   sin avisar ni gastar correos.
  * - Freno de rachas: como máximo 20 envíos por hora en total.
@@ -38,7 +38,7 @@ var MAX_ENVIOS_POR_HORA = 20;
 var MAX_TEXTO = 500;
 var MAX_NOMBRE = 100;
 var MAX_LINEAS = 10;
-var MAX_CANTIDAD = 20;
+var MAX_CANTIDAD = 50;
 var MAX_CUERPO = 10000;
 
 function doPost(e) {
@@ -67,41 +67,30 @@ function doPost(e) {
     var sheetId = PropertiesService.getScriptProperties().getProperty('SHEET_ID');
     var libro = SpreadsheetApp.openById(sheetId);
 
-    if (datos.tipo === 'reserva') {
-      var resumen = resumenLineas(datos.lineas);
-      pestania(libro, 'Reservas', ['Fecha', 'Nombre', 'Correo', 'Teléfono', 'Pedido', 'Comentario'])
-        .appendRow([new Date(), limpiar(datos.nombre, MAX_NOMBRE), limpiar(datos.email, MAX_TEXTO),
-          limpiar(datos.telefono || '', 30), limpiar(resumen, MAX_TEXTO),
-          limpiar(datos.comentario || '', MAX_TEXTO)]);
+    var resumen = resumenSolicitud(datos);
+    var tipo = datos.lineas.length && datos.donativo ? 'Productos y donativo'
+      : datos.donativo ? 'Donativo' : 'Productos';
 
-      MailApp.sendEmail({
-        to: CORREO_ASAMBLEA,
-        subject: 'Nueva reserva: ' + datos.nombre,
-        body: 'Reserva de ' + datos.nombre + ' <' + datos.email + '>' +
-          (datos.telefono ? ' · ' + datos.telefono : '') + '\n\n' + resumen +
-          (datos.comentario ? '\n\nComentario: ' + datos.comentario : '')
-      });
+    pestania(libro, 'Solicitudes', ['Fecha', 'Nombre', 'Correo', 'Teléfono', 'Tipo', 'Detalle', 'Comentario'])
+      .appendRow([new Date(), limpiar(datos.nombre, MAX_NOMBRE), limpiar(datos.email, MAX_TEXTO),
+        limpiar(datos.telefono || '', 30), tipo, limpiar(resumen, MAX_TEXTO),
+        limpiar(datos.comentario || '', MAX_TEXTO)]);
 
-      MailApp.sendEmail({
-        to: datos.email,
-        subject: 'Hemos recibido tu reserva - Asamblea Tomás Bretón',
-        body: 'Hola ' + datos.nombre + ',\n\nHemos recibido tu reserva:\n\n' + resumen + '\n\n' +
-          'No tienes que pagar nada todavía: te escribiremos para confirmar la reserva, su precio y la forma de pago y entrega.\n\n' +
-          'Asamblea Tomás Bretón'
-      });
+    MailApp.sendEmail({
+      to: CORREO_ASAMBLEA,
+      subject: 'Nueva solicitud (' + tipo + '): ' + datos.nombre,
+      body: 'Solicitud de ' + datos.nombre + ' <' + datos.email + '>' +
+        (datos.telefono ? ' · ' + datos.telefono : '') + '\n\n' + resumen +
+        (datos.comentario ? '\n\nComentario: ' + datos.comentario : '')
+    });
 
-    } else { // quiero-ayudar
-      pestania(libro, 'Ayuda', ['Fecha', 'Nombre', 'Contacto', 'Mensaje'])
-        .appendRow([new Date(), limpiar(datos.nombre, MAX_NOMBRE),
-          limpiar(datos.contacto, MAX_TEXTO), limpiar(datos.mensaje || '', MAX_TEXTO)]);
-
-      MailApp.sendEmail({
-        to: CORREO_ASAMBLEA,
-        subject: 'Alguien quiere ayudar: ' + datos.nombre,
-        body: datos.nombre + ' ha dejado su contacto en la web:\n' + datos.contacto +
-          (datos.mensaje ? '\n\nMensaje: ' + datos.mensaje : '')
-      });
-    }
+    MailApp.sendEmail({
+      to: datos.email,
+      subject: 'Hemos recibido tu solicitud - Asamblea Tomás Bretón',
+      body: 'Hola ' + datos.nombre + ',\n\nHemos recibido tu solicitud:\n\n' + resumen + '\n\n' +
+        'Te escribiremos para confirmarla y concretar contigo los detalles.\n\n' +
+        'Asamblea Tomás Bretón'
+    });
 
     return salida({ ok: true });
   } catch (err) {
@@ -110,32 +99,31 @@ function doPost(e) {
 }
 
 function validar(datos) {
-  if (!datos || (datos.tipo !== 'reserva' && datos.tipo !== 'quiero-ayudar')) {
+  if (!datos || datos.tipo !== 'apoyo') {
     return 'tipo desconocido';
   }
   if (!datos.nombre || typeof datos.nombre !== 'string' || !datos.nombre.trim()) {
     return 'falta el nombre';
   }
-  if (datos.tipo === 'reserva') {
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(datos.email || '')) {
-      return 'correo no válido';
-    }
-    if (!Array.isArray(datos.lineas) || datos.lineas.length < 1 || datos.lineas.length > MAX_LINEAS) {
-      return 'pedido vacío o demasiado largo';
-    }
-    for (var i = 0; i < datos.lineas.length; i++) {
-      var l = datos.lineas[i];
-      var cantidad = Number(l.cantidad);
-      if (!l.producto || typeof l.producto !== 'string' ||
-          !Number.isInteger(cantidad) || cantidad < 1 || cantidad > MAX_CANTIDAD) {
-        return 'línea de pedido no válida';
-      }
-    }
-  } else {
-    if (!datos.contacto || typeof datos.contacto !== 'string' || !datos.contacto.trim()) {
-      return 'falta un contacto';
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(datos.email || '')) {
+    return 'correo no válido';
+  }
+  var lineas = Array.isArray(datos.lineas) ? datos.lineas : [];
+  if (!lineas.length && datos.donativo !== true) {
+    return 'solicitud vacía';
+  }
+  if (lineas.length > MAX_LINEAS) {
+    return 'demasiadas líneas';
+  }
+  for (var i = 0; i < lineas.length; i++) {
+    var l = lineas[i];
+    var cantidad = Number(l.cantidad);
+    if (!l.producto || typeof l.producto !== 'string' ||
+        !Number.isInteger(cantidad) || cantidad < 1 || cantidad > MAX_CANTIDAD) {
+      return 'línea no válida';
     }
   }
+  datos.lineas = lineas;
   return null;
 }
 
@@ -170,10 +158,15 @@ function pestania(libro, nombre, cabecera) {
   return hoja;
 }
 
-function resumenLineas(lineas) {
-  return (lineas || []).map(function (l) {
-    return l.cantidad + ' x ' + l.producto + ' (' + l.talla + ')';
-  }).join('\n');
+function resumenSolicitud(datos) {
+  var partes = (datos.lineas || []).map(function (l) {
+    return l.cantidad + ' x ' + l.producto + (l.detalle ? ' (' + l.detalle + ')' : '');
+  });
+  if (datos.donativo) {
+    partes.push('Quiere hacer un donativo');
+  }
+  var total = Number(datos.totalEstimado) || 0;
+  return partes.join('\n') + (total > 0 ? '\nTotal estimado: ' + total + ' € (precios provisionales)' : '');
 }
 
 function salida(obj) {
