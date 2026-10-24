@@ -88,3 +88,9 @@ legend{font-weight:700;padding:0 .3rem}
 .producto img{width:100%;border-radius:.7rem;border:1px solid var(--borde);margin-bottom:.4rem}
 .foto-cesta{max-width:220px;float:right;margin:0 0 .8rem .9rem;border-radius:.8rem;border:1px solid var(--borde)}
 @media(max-width:640px){.foto-cesta{float:none;display:block;margin:0 auto 1rem;max-width:180px}}
+
+/* Tarjetas de apoyo pulsables: toda la tarjeta lleva al formulario */
+#apoyar .producto{position:relative}
+#apoyar .tarjeta-enlace{position:absolute;inset:0;border-radius:1rem}
+#apoyar .tarjeta-enlace:focus-visible{outline:3px solid var(--verde-vivo);outline-offset:2px}
+#apoyar .producto a:not(.tarjeta-enlace){position:relative;z-index:1}
