@@ -77,3 +77,10 @@ legend{font-weight:700;padding:0 .3rem}
 /* Bloque destacado (puesto informativo) */
 .destacado { background: #e3efdf; border: 2px solid #1e6b41; border-radius: 14px; padding: 1.4rem 1.6rem; margin: 2rem 0; }
 .destacado h2 { margin-top: 0; }
+
+.peticiones{margin:2.2rem 0}
+.peticiones h2{font-size:1.5rem;margin:0 0 .6rem}
+.peticiones-intro{margin:0 0 .9rem;color:var(--gris)}
+.peticiones ul{list-style:none;margin:0;padding:0;display:grid;gap:.8rem}
+@media(min-width:640px){.peticiones ul{grid-template-columns:repeat(2,1fr)}}
+.peticiones li{background:var(--tarjeta);border:2px solid var(--tinta);border-radius:1rem;padding:1rem 1.2rem;font-size:1.15rem;font-weight:700;box-shadow:4px 4px 0 var(--mostaza)}
