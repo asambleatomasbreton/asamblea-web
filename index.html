@@ -8,8 +8,8 @@
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-<div class="cinta-preview">VISTA PREVIA · Diseño y textos pendientes de confirmación de la asamblea · Los precios se confirman por correo</div>
-<a class="saltar" href="#reserva">Saltar al formulario de reserva</a>
+<div class="cinta-preview">VISTA PREVIA · Textos, fotos y precios pendientes de confirmación de la asamblea</div>
+<a class="saltar" href="#escribenos">Saltar al formulario</a>
 
 <header class="top">
   <p class="nombre">Asamblea Tomás Bretón</p>
@@ -19,9 +19,9 @@
 <main>
   <section class="hero">
     <h1>Somos la Asamblea Tomás Bretón</h1>
-    <p class="lede">Somos maestros y maestras del colegio Tomás Bretón que apoyamos la huelga indefinida por la enseñanza pública. Si quieres apoyarla tú también, ayúdanos con nuestra caja de resistencia. Aquí puedes reservar camisetas, chapas, mochilas y botellas o dejarnos tu contacto para ayudar: no pagas nada en la web, te escribimos y lo acordamos contigo.</p>
+    <p class="lede">Somos maestros y maestras del colegio Tomás Bretón que apoyamos la huelga indefinida por la enseñanza pública. Las familias sois bienvenidas: vuestra ayuda suma.</p>
     <div class="hero-acciones">
-      <a class="boton" href="#reserva">Hacer una reserva</a>
+      <a class="boton" href="#apoyar">Cómo nos puedes apoyar</a>
       <a class="boton boton-sec" href="#huelga">Saber más sobre la huelga</a>
     </div>
   </section>
@@ -32,45 +32,70 @@
     <p>Allí se pueden adquirir las papeletas del sorteo de la cesta.</p>
   </section>
 
-  <section id="reserva" class="formulario">
-    <h2>Tu reserva</h2>
-    <p>Pon la cantidad de lo que quieras. Deja a 0 lo que no. Solo te pedimos lo necesario para escribirte.</p>
-    <form id="form-pedido" novalidate>
+  <section id="apoyar">
+    <h2>Cómo nos puedes apoyar</h2>
+    <p class="apoyo">Tu apoyo importa. Cuando familias y docentes caminamos de la mano, tenemos más fuerza para lograr una educación pública mejor para todos y todas.</p>
+    <div class="rejilla">
+      <article class="producto sticker">
+        <h3>Reserva productos</h3>
+        <p>Camisetas, chapas, mochilas y botellas. Mira el <a href="#productos">catálogo con fotos y precios</a> y márcalos en el formulario.</p>
+      </article>
+      <article class="producto sticker giro">
+        <h3>Haz un donativo</h3>
+        <p>Marca «Quiero hacer un donativo» en el formulario y te escribimos para concretarlo contigo.</p>
+      </article>
+      <article class="producto sticker">
+        <h3>Papeletas del sorteo</h3>
+        <p>Cómpralas en el puesto informativo, a la entrada y a la salida del cole, o resérvalas por correo y recógelas después.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="escribenos" class="formulario">
+    <h2>Escríbenos</h2>
+    <p>Déjanos tu contacto o escríbenos al email de la asamblea: <a href="mailto:asambleatomasbreton@gmail.com">asambleatomasbreton@gmail.com</a>. Te escribimos para concretar.</p>
+    <form id="form-apoyo" novalidate>
       <fieldset>
-        <legend>Camisetas</legend>
-        <div class="tallas" data-producto="camiseta-adulto">
+        <legend>Camisetas · 10 € (precio provisional)</legend>
+        <div class="tallas" data-producto="Camiseta">
           <p class="grupo-talla">Adulto</p>
-          <label>S <input type="number" min="0" max="99" value="0" data-talla="S"></label>
-          <label>M <input type="number" min="0" max="99" value="0" data-talla="M"></label>
-          <label>L <input type="number" min="0" max="99" value="0" data-talla="L"></label>
-          <label>XL <input type="number" min="0" max="99" value="0" data-talla="XL"></label>
-          <label>XXL <input type="number" min="0" max="99" value="0" data-talla="XXL"></label>
+          <label>S <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="adulto S"></label>
+          <label>M <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="adulto M"></label>
+          <label>L <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="adulto L"></label>
+          <label>XL <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="adulto XL"></label>
+          <label>XXL <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="adulto XXL"></label>
         </div>
-        <div class="tallas" data-producto="camiseta-infantil">
+        <div class="tallas" data-producto="Camiseta">
           <p class="grupo-talla">Infantil</p>
-          <label>3-4 <input type="number" min="0" max="99" value="0" data-talla="3-4 años"></label>
-          <label>5-6 <input type="number" min="0" max="99" value="0" data-talla="5-6 años"></label>
-          <label>7-8 <input type="number" min="0" max="99" value="0" data-talla="7-8 años"></label>
-          <label>9-10 <input type="number" min="0" max="99" value="0" data-talla="9-10 años"></label>
-          <label>11-12 <input type="number" min="0" max="99" value="0" data-talla="11-12 años"></label>
+          <label>3-4 <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="infantil 3-4 años"></label>
+          <label>5-6 <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="infantil 5-6 años"></label>
+          <label>7-8 <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="infantil 7-8 años"></label>
+          <label>9-10 <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="infantil 9-10 años"></label>
+          <label>11-12 <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="infantil 11-12 años"></label>
         </div>
       </fieldset>
       <fieldset>
-        <legend>Chapas</legend>
-        <div class="tallas" data-producto="chapa">
-          <label>Modelo 1 <input type="number" min="0" max="99" value="0" data-talla="Modelo 1"></label>
-          <label>Modelo 2 <input type="number" min="0" max="99" value="0" data-talla="Modelo 2"></label>
-          <label>Modelo 3 <input type="number" min="0" max="99" value="0" data-talla="Modelo 3"></label>
+        <legend>Chapas · 2 € (precio provisional)</legend>
+        <div class="tallas" data-producto="Chapa">
+          <label>Modelo 1 <input type="number" min="0" max="99" value="0" data-precio="2" data-detalle="modelo 1"></label>
+          <label>Modelo 2 <input type="number" min="0" max="99" value="0" data-precio="2" data-detalle="modelo 2"></label>
+          <label>Modelo 3 <input type="number" min="0" max="99" value="0" data-precio="2" data-detalle="modelo 3"></label>
         </div>
       </fieldset>
       <fieldset>
-        <legend>Mochilas y botellas</legend>
-        <div class="tallas" data-producto="mochila">
-          <label>Mochilas <input type="number" min="0" max="99" value="0" data-talla="Modelo por confirmar"></label>
+        <legend>Mochilas y botellas · precio por confirmar</legend>
+        <div class="tallas" data-producto="Mochila">
+          <label>Mochilas <input type="number" min="0" max="99" value="0" data-precio="0" data-detalle="modelo por confirmar"></label>
         </div>
-        <div class="tallas" data-producto="botella">
-          <label>Botellas <input type="number" min="0" max="99" value="0" data-talla="Modelo por confirmar"></label>
+        <div class="tallas" data-producto="Botella">
+          <label>Botellas <input type="number" min="0" max="99" value="0" data-precio="0" data-detalle="modelo por confirmar"></label>
         </div>
+      </fieldset>
+      <fieldset>
+        <legend>Donativo</legend>
+        <label class="campo check">
+          <input type="checkbox" id="quiero-donar"> Quiero hacer un donativo
+        </label>
       </fieldset>
       <fieldset>
         <legend>Tus datos</legend>
@@ -92,72 +117,34 @@
       </fieldset>
 
       <div class="resumen">
-        <h3>Tu reserva</h3>
+        <h3>Tu selección</h3>
         <p id="resumen-detalle">Todavía no has elegido nada.</p>
-        <p class="nota">El precio se confirma por correo antes de pagar nada.</p>
+        <p class="nota">Los precios marcados como provisionales se confirman por correo.</p>
       </div>
 
-      <p class="nota">Usaremos tus datos solo para gestionar tu reserva. Se guardan en una hoja de cálculo y un correo de Google de la asamblea (herramientas de Google, con sus propias condiciones) y no se publican en la web. Lee la <a href="privacidad.html">información de privacidad</a>.</p>
+      <p class="nota">Usaremos tus datos solo para gestionar tu solicitud. Se guardan en una hoja de cálculo y un correo de Google de la asamblea (herramientas de Google, con sus propias condiciones) y no se publican en la web. Lee la <a href="privacidad.html">información de privacidad</a>.</p>
       <label class="campo check">
-        <input type="checkbox" id="privacidad-ok" required> Acepto que la asamblea me escriba para gestionar mi reserva.
+        <input type="checkbox" id="privacidad-ok" required> Acepto que la asamblea me escriba para gestionar mi solicitud.
       </label>
 
       <p id="estado-envio" class="estado" role="status"></p>
-      <button type="submit" class="boton">Enviar reserva</button>
-    </form>
-  </section>
-
-  <section id="donar" class="formulario formulario-donar">
-    <h2>¿Quieres ayudar de otra forma?</h2>
-<p class="apoyo">Tu apoyo importa. Cuando familias y docentes caminamos de la mano, tenemos más fuerza para lograr una educación pública mejor para todos y todas.</p>
-    <p>Si prefieres hacer un donativo o echar una mano con la organización, déjanos tu contacto o escríbenos al email de la asamblea: <a href="mailto:asambleatomasbreton@gmail.com">asambleatomasbreton@gmail.com</a>. Lo que se recaude con los productos, el sorteo y los donativos va a la caja de resistencia de la huelga, que ayuda a compensar en parte el sueldo que deja de cobrar el profesorado que la secunda.</p>
-    <form id="form-donacion" novalidate>
-      <fieldset>
-        <legend>Tu contacto</legend>
-        <label class="campo">Nombre
-          <input type="text" name="nombre" required autocomplete="name">
-        </label>
-        <label class="campo">Correo electrónico o teléfono
-          <input type="text" name="contacto" required>
-        </label>
-        <label class="campo">¿Cómo te gustaría ayudar? (opcional)
-          <textarea name="mensaje" rows="3"></textarea>
-        </label>
-        <label class="campo hp" aria-hidden="true">Empresa
-          <input type="text" name="empresa" tabindex="-1" autocomplete="off">
-        </label>
-      </fieldset>
-      <p class="nota">Usaremos tu contacto solo para responderte. Lee la <a href="privacidad.html">información de privacidad</a>.</p>
-      <label class="campo check">
-        <input type="checkbox" id="privacidad-donacion-ok" required> Acepto que la asamblea me escriba.
-      </label>
-      <p id="estado-donacion" class="estado" role="status"></p>
       <button type="submit" class="boton">Quiero que me escribáis</button>
     </form>
   </section>
 
-  <section class="peticiones" id="peticiones">
-    <h2>Lo que pedimos</h2>
-    <p class="peticiones-intro">Cinco mejoras que defiende esta asamblea, con un mismo objetivo: mejorar la educación de vuestros hijos e hijas.</p>
-    <ul>
-      <li>Bajada de ratios</li>
-      <li>Menos horas lectivas, para preparar mejor las clases</li>
-      <li>Más profesorado de atención a la diversidad</li>
-      <li>Menos burocracia</li>
-      <li>Climatización de los centros</li>
-    </ul>
-  </section>
-
   <section class="productos" id="productos">
     <h2>Lo que hacemos</h2>
+    <p class="provisional">Fotos y precios provisionales, tomados con permiso de la web de otra asamblea; la asamblea confirmará diseños y precios antes de abrir pedidos.</p>
     <div class="rejilla">
       <article class="producto sticker">
-        <p class="precio">Precio por confirmar</p>
-        <h3>Camiseta verde</h3>
+        <img src="assets/productos/camiseta.webp" alt="Camiseta verde de ejemplo, con lema de apoyo a la escuela pública">
+        <p class="precio">10 € <span class="provisional">(provisional)</span></p>
+        <h3>Camisetas</h3>
         <p>La de siempre, la de la escuela pública. Tallas de adulto e infantil. <span class="provisional">Diseño por confirmar por la asamblea.</span></p>
       </article>
       <article class="producto sticker giro">
-        <p class="precio">Precio por confirmar</p>
+        <img src="assets/productos/chapa-de-todas.webp" alt="Chapa de ejemplo con lema de apoyo">
+        <p class="precio">2 € <span class="provisional">(provisional)</span></p>
         <h3>Chapas</h3>
         <p>Con lemas de apoyo a la escuela pública, para la solapa, la mochila o el carro. <span class="provisional">Modelos por confirmar.</span></p>
       </article>
@@ -176,16 +163,20 @@
 
   <section class="texto" id="sorteo">
     <h2>Sorteo de una cesta</h2>
-    <p>La asamblea vende papeletas para el sorteo de una cesta con jamón, vino y una botella de aceite de oliva. Puedes comprarlas en el puesto informativo, a la entrada y a la salida del colegio, o reservarlas escribiendo a <a href="mailto:asambleatomasbreton@gmail.com">asambleatomasbreton@gmail.com</a> y recogerlas después. La web de momento no vende papeletas. Las bases, la fecha del sorteo y el precio de la papeleta se añadirán aquí cuando estén cerrados. <span class="provisional">(Detalles del sorteo pendientes de confirmación.)</span></p>
+    <img class="foto-cesta" src="assets/productos/rifa-cesta.webp" alt="Cesta del sorteo de ejemplo: jamón, vino y una botella de aceite de oliva">
+    <p>La asamblea vende papeletas para el sorteo de una cesta con jamón, vino y una botella de aceite de oliva. Papeleta: 5 € <span class="provisional">(precio provisional)</span>. Puedes comprarlas en el puesto informativo, a la entrada y a la salida del colegio, o reservarlas escribiendo a <a href="mailto:asambleatomasbreton@gmail.com">asambleatomasbreton@gmail.com</a> y recogerlas después. La web de momento no vende papeletas. Las bases y la fecha del sorteo se añadirán aquí cuando estén cerradas. <span class="provisional">(Detalles del sorteo pendientes de confirmación.)</span></p>
   </section>
 
-  <section class="pasos">
-    <h2>Cómo funciona</h2>
-    <ol>
-      <li><strong>Reservas aquí</strong><br>Rellenas el formulario. No se cobra nada en la web.</li>
-      <li><strong>Te escribimos</strong><br>Desde asambleatomasbreton@gmail.com confirmamos tu reserva, su precio y acordamos el pago y la entrega.</li>
-      <li><strong>Lo haces visible</strong><br>Cada camiseta, chapa, mochila o botella suma apoyo visible a la escuela pública.</li>
-    </ol>
+  <section class="peticiones" id="peticiones">
+    <h2>Lo que pedimos</h2>
+    <p class="peticiones-intro">Cinco mejoras que defiende esta asamblea, con un mismo objetivo: mejorar la educación de vuestros hijos e hijas.</p>
+    <ul>
+      <li>Bajada de ratios</li>
+      <li>Menos horas lectivas, para preparar mejor las clases</li>
+      <li>Más profesorado de atención a la diversidad</li>
+      <li>Menos burocracia</li>
+      <li>Climatización de los centros</li>
+    </ul>
   </section>
 
   <section class="contexto" id="huelga">
