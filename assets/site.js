@@ -1,14 +1,14 @@
 /* Lógica de la web de la Asamblea Tomás Bretón.
-   Las reservas y los avisos de "quiero ayudar" se envían al endpoint de
+   El formulario único (productos y/o donativo) se envía al endpoint de
    Google Apps Script configurado en assets/config.js.
-   Nada se cobra en la web: la asamblea contacta después con cada persona. */
+   La asamblea contacta después con cada persona para concretar. */
 (function () {
   'use strict';
   var cfg = window.ASAMBLEA_CONFIG || {};
 
   function enviar(datos, estado, form, hecho) {
     if (!cfg.pedidosEndpoint) {
-      estado.innerHTML = 'Modo demostración: este formulario todavía no envía nada. Falta conectar la hoja de pedidos (ver README).';
+      estado.textContent = 'Modo demostración: este formulario todavía no envía nada. Falta conectar la hoja de pedidos (ver README).';
       estado.className = 'estado demo';
       return;
     }
@@ -23,7 +23,7 @@
         estado.textContent = hecho;
         estado.className = 'estado ok';
         form.reset();
-        if (form.id === 'form-pedido') resumen();
+        resumen();
       } else { throw new Error((r && r.error) || 'error'); }
     }).catch(function () {
       estado.textContent = 'No se pudo enviar. Inténtalo de nuevo en unos minutos; si sigue fallando, escribe a ' + (cfg.email || 'la asamblea') + '.';
@@ -31,10 +31,10 @@
     });
   }
 
-  /* ---- Formulario de reserva ---- */
-  var form = document.getElementById('form-pedido');
+  var form = document.getElementById('form-apoyo');
   var estado = document.getElementById('estado-envio');
   var detalleEl = document.getElementById('resumen-detalle');
+  var donativoEl = document.getElementById('quiero-donar');
 
   function lineas() {
     var out = [];
@@ -42,17 +42,33 @@
       var producto = grupo.getAttribute('data-producto');
       grupo.querySelectorAll('input[type="number"]').forEach(function (input) {
         var n = parseInt(input.value, 10) || 0;
-        if (n > 0) out.push({ producto: producto, talla: input.getAttribute('data-talla'), cantidad: n });
+        if (n > 0) out.push({
+          producto: producto,
+          detalle: input.getAttribute('data-detalle') || '',
+          precio: parseFloat(input.getAttribute('data-precio')) || 0,
+          cantidad: n
+        });
       });
     });
     return out;
   }
 
+  function total(ls) {
+    return ls.reduce(function (s, l) { return s + l.precio * l.cantidad; }, 0);
+  }
+
   function resumen() {
     var ls = lineas();
-    detalleEl.textContent = ls.length
-      ? ls.map(function (l) { return l.cantidad + ' × ' + l.producto + ' ' + l.talla; }).join(' · ')
-      : 'Todavía no has elegido nada.';
+    var partes = ls.map(function (l) {
+      return l.cantidad + ' × ' + l.producto + (l.detalle ? ' (' + l.detalle + ')' : '');
+    });
+    if (donativoEl.checked) partes.push('Donativo');
+    if (!partes.length) {
+      detalleEl.textContent = 'Todavía no has elegido nada.';
+      return;
+    }
+    var t = total(ls);
+    detalleEl.textContent = partes.join(' · ') + (t > 0 ? ' — Total estimado: ' + t + ' € (precios provisionales)' : '');
   }
 
   form.addEventListener('input', resumen);
@@ -61,33 +77,20 @@
   form.addEventListener('submit', function (ev) {
     ev.preventDefault();
     var ls = lineas();
-    if (!ls.length) { estado.textContent = 'Elige al menos una cosa para reservar.'; estado.className = 'estado error'; return; }
+    var donativo = donativoEl.checked;
+    if (!ls.length && !donativo) { estado.textContent = 'Elige productos o marca «Quiero hacer un donativo».'; estado.className = 'estado error'; return; }
     if (!form.nombre.value.trim() || !form.email.value.trim()) { estado.textContent = 'Faltan tu nombre o tu correo.'; estado.className = 'estado error'; return; }
     if (!document.getElementById('privacidad-ok').checked) { estado.textContent = 'Marca la casilla para que podamos escribirte.'; estado.className = 'estado error'; return; }
     enviar({
-      tipo: 'reserva',
+      tipo: 'apoyo',
       lineas: ls,
+      donativo: donativo,
+      totalEstimado: total(ls),
       nombre: form.nombre.value.trim(),
       email: form.email.value.trim(),
       telefono: form.telefono.value.trim(),
       comentario: form.comentario.value.trim(),
       empresa: form.empresa ? form.empresa.value : ''
-    }, estado, form, 'Reserva enviada. Te escribiremos para confirmarla. ¡Gracias!');
-  });
-
-  /* ---- Formulario de "quiero ayudar" ---- */
-  var formD = document.getElementById('form-donacion');
-  var estadoD = document.getElementById('estado-donacion');
-  formD.addEventListener('submit', function (ev) {
-    ev.preventDefault();
-    if (!formD.nombre.value.trim() || !formD.contacto.value.trim()) { estadoD.textContent = 'Faltan tu nombre o tu contacto.'; estadoD.className = 'estado error'; return; }
-    if (!document.getElementById('privacidad-donacion-ok').checked) { estadoD.textContent = 'Marca la casilla para que podamos escribirte.'; estadoD.className = 'estado error'; return; }
-    enviar({
-      tipo: 'quiero-ayudar',
-      nombre: formD.nombre.value.trim(),
-      contacto: formD.contacto.value.trim(),
-      mensaje: formD.mensaje.value.trim(),
-      empresa: formD.empresa ? formD.empresa.value : ''
-    }, estadoD, formD, 'Anotado. Te escribiremos pronto. ¡Gracias!');
+    }, estado, form, 'Anotado. Te escribiremos para concretar. ¡Gracias!');
   });
 })();
