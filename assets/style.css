@@ -73,3 +73,7 @@ legend{font-weight:700;padding:0 .3rem}
 
 /* Campo trampa para robots: no se muestra a las personas */
 .hp { position: absolute; left: -10000px; top: -10000px; height: 1px; width: 1px; overflow: hidden; }
+
+/* Bloque destacado (puesto informativo) */
+.destacado { background: #e3efdf; border: 2px solid #1e6b41; border-radius: 14px; padding: 1.4rem 1.6rem; margin: 2rem 0; }
+.destacado h2 { margin-top: 0; }
