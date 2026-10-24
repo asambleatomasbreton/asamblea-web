@@ -84,3 +84,7 @@ legend{font-weight:700;padding:0 .3rem}
 .peticiones ul{list-style:none;margin:0;padding:0;display:grid;gap:.8rem}
 @media(min-width:640px){.peticiones ul{grid-template-columns:repeat(2,1fr)}}
 .peticiones li{background:var(--tarjeta);border:2px solid var(--tinta);border-radius:1rem;padding:1rem 1.2rem;font-size:1.15rem;font-weight:700;box-shadow:4px 4px 0 var(--mostaza)}
+
+.producto img{width:100%;border-radius:.7rem;border:1px solid var(--borde);margin-bottom:.4rem}
+.foto-cesta{max-width:220px;float:right;margin:0 0 .8rem .9rem;border-radius:.8rem;border:1px solid var(--borde)}
+@media(max-width:640px){.foto-cesta{float:none;display:block;margin:0 auto 1rem;max-width:180px}}
