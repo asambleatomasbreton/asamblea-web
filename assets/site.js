@@ -44,51 +44,6 @@
         var n = parseInt(input.value, 10) || 0;
         if (n > 0) out.push({
           producto: producto,
-   El formulario único (productos y/o donativo) se envía al endpoint de
-   Google Apps Script configurado en assets/config.js.
-   La asamblea contacta después con cada persona para concretar. */
-(function () {
-  'use strict';
-  var cfg = window.ASAMBLEA_CONFIG || {};
-
-  function enviar(datos, estado, form, hecho) {
-    if (!cfg.pedidosEndpoint) {
-      estado.textContent = 'Modo demostración: este formulario todavía no envía nada. Falta conectar la hoja de pedidos (ver README).';
-      estado.className = 'estado demo';
-      return;
-    }
-    estado.textContent = 'Enviando…';
-    estado.className = 'estado';
-    fetch(cfg.pedidosEndpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify(datos)
-    }).then(function (r) { return r.json(); }).then(function (r) {
-      if (r && r.ok) {
-        estado.textContent = hecho;
-        estado.className = 'estado ok';
-        form.reset();
-        resumen();
-      } else { throw new Error((r && r.error) || 'error'); }
-    }).catch(function () {
-      estado.textContent = 'No se pudo enviar. Inténtalo de nuevo en unos minutos; si sigue fallando, escribe a ' + (cfg.email || 'la asamblea') + '.';
-      estado.className = 'estado error';
-    });
-  }
-
-  var form = document.getElementById('form-apoyo');
-  var estado = document.getElementById('estado-envio');
-  var detalleEl = document.getElementById('resumen-detalle');
-  var donativoEl = document.getElementById('quiero-donar');
-
-  function lineas() {
-    var out = [];
-    document.querySelectorAll('.tallas[data-producto]').forEach(function (grupo) {
-      var producto = grupo.getAttribute('data-producto');
-      grupo.querySelectorAll('input[type="number"]').forEach(function (input) {
-        var n = parseInt(input.value, 10) || 0;
-        if (n > 0) out.push({
-          producto: producto,
           detalle: input.getAttribute('data-detalle') || '',
           precio: parseFloat(input.getAttribute('data-precio')) || 0,
           cantidad: n
