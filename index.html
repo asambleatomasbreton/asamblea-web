@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Asamblea Tomás Bretón · Apoya la escuela pública</title>
+<meta name="robots" content="noindex"><title>Asamblea Tomás Bretón · Apoya la escuela pública</title>
 <meta name="description" content="Web de la Asamblea Tomás Bretón: maestras y maestros del colegio. Reserva camisetas, sudaderas, chapas, mochilas y botellas, papeletas del sorteo de una cesta o haz un donativo.">
 <link rel="stylesheet" href="assets/style.css">
 </head>
@@ -32,8 +32,8 @@
     <div class="rejilla">
       <article class="producto sticker">
         <h3>Reserva productos</h3>
-        <p>Camisetas, sudaderas, chapas, mochilas y botellas. Mira el <a href="#productos">catálogo con fotos y precios</a> y márcalos en el formulario.</p>
-        <a class="tarjeta-enlace" href="#escribenos" aria-label="Ir al formulario para reservar productos"></a>
+        <p>Camisetas, sudaderas, chapas, mochilas y botellas. Elige la cantidad justo debajo de cada producto del <a href="#productos">catálogo</a>.</p>
+        <a class="tarjeta-enlace" href="#productos" aria-label="Ir a los productos"></a>
       </article>
       <article class="producto sticker giro">
         <h3>Quiero colaborar</h3>
@@ -50,95 +50,7 @@
 
   <section id="escribenos" class="formulario">
     <h2>Escríbenos</h2>
-    <p>Déjanos tu contacto o escríbenos al email de la asamblea: <a href="mailto:asambleatomasbreton@gmail.com">asambleatomasbreton@gmail.com</a>. Te escribimos para concretar.</p>
-    <form id="form-apoyo" novalidate>
-      <fieldset>
-        <legend>Tus datos</legend>
-        <label class="campo">Nombre
-          <input type="text" name="nombre" required autocomplete="name">
-        </label>
-        <label class="campo">Correo electrónico
-          <input type="email" name="email" required autocomplete="email">
-        </label>
-        <label class="campo">Teléfono (opcional, si prefieres que te escribamos por WhatsApp)
-          <input type="tel" name="telefono" autocomplete="tel">
-        </label>
-        <label class="campo">Algo más que debamos saber (opcional)
-          <textarea name="comentario" rows="3"></textarea>
-        </label>
-        <label class="campo hp" aria-hidden="true">Empresa
-          <input type="text" name="empresa" tabindex="-1" autocomplete="off">
-        </label>
-      </fieldset>
-      <fieldset>
-        <legend>Camisetas · 10 € (precio provisional)</legend>
-        <div class="tallas" data-producto="Camiseta">
-          <p class="grupo-talla">Adulto</p>
-          <label>S <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="adulto S"></label>
-          <label>M <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="adulto M"></label>
-          <label>L <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="adulto L"></label>
-          <label>XL <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="adulto XL"></label>
-          <label>XXL <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="adulto XXL"></label>
-        </div>
-        <div class="tallas" data-producto="Camiseta">
-          <p class="grupo-talla">Infantil</p>
-          <label>3-4 <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="infantil 3-4 años"></label>
-          <label>5-6 <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="infantil 5-6 años"></label>
-          <label>7-8 <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="infantil 7-8 años"></label>
-          <label>9-10 <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="infantil 9-10 años"></label>
-          <label>11-12 <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="infantil 11-12 años"></label>
-        </div>
-      </fieldset>
-      <fieldset>
-        <legend>Sudaderas · 20 €</legend>
-        <div class="tallas" data-producto="Sudadera">
-          <label>Sudaderas <input type="number" min="0" max="99" value="0" data-precio="20" data-detalle="unidad"></label>
-        </div>
-      </fieldset>
-      <fieldset>
-        <legend>Chapas · 2 € (precio provisional)</legend>
-        <div class="tallas" data-producto="Chapa">
-          <label>Modelo 1 <input type="number" min="0" max="99" value="0" data-precio="2" data-detalle="modelo 1"></label>
-          <label>Modelo 2 <input type="number" min="0" max="99" value="0" data-precio="2" data-detalle="modelo 2"></label>
-          <label>Modelo 3 <input type="number" min="0" max="99" value="0" data-precio="2" data-detalle="modelo 3"></label>
-        </div>
-      </fieldset>
-      <fieldset>
-        <legend>Mochilas · próximamente a la venta · Botellas · 10 €</legend>
-        <p>Mochilas: próximamente a la venta.</p>
-        <div class="tallas" data-producto="Botella">
-          <label>Botellas · 10 € <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="modelo por confirmar"></label>
-        </div>
-      </fieldset>
-      <fieldset>
-        <legend>Papeletas del sorteo · 5 € (precio provisional)</legend>
-        <div class="tallas" data-producto="Papeleta del sorteo">
-          <label>Papeletas <input type="number" min="0" max="99" value="0" data-precio="5" data-detalle="sorteo de la cesta"></label>
-        </div>
-        <p class="nota">Las bases y la fecha del sorteo se añadirán cuando estén cerradas.</p>
-      </fieldset>
-      <fieldset>
-        <legend>Colaborar</legend>
-        <p class="nota">Hacer pancartas, ayudar con las propuestas, hacer donativos.</p>
-        <label class="campo check">
-          <input type="checkbox" id="quiero-donar"> Quiero colaborar
-        </label>
-      </fieldset>
-
-      <div class="resumen">
-        <h3>Tu selección</h3>
-        <p id="resumen-detalle">Todavía no has elegido nada.</p>
-        <p class="nota">Los precios marcados como provisionales se confirman por correo.</p>
-      </div>
-
-      <p class="nota">Usaremos tus datos solo para gestionar tu solicitud. Se guardan en una hoja de cálculo y un correo de Google de la asamblea (herramientas de Google, con sus propias condiciones) y no se publican en la web. Lee la <a href="privacidad.html">información de privacidad</a>.</p>
-      <label class="campo check">
-        <input type="checkbox" id="privacidad-ok" required> Acepto que la asamblea me escriba para gestionar mi solicitud.
-      </label>
-
-      <p id="estado-envio" class="estado" role="status"></p>
-      <button type="submit" class="boton">Enviar</button>
-    </form>
+    <p>Reserva tus productos más abajo, justo debajo de cada uno, o escríbenos al email de la asamblea: <a href="mailto:asambleatomasbreton@gmail.com">asambleatomasbreton@gmail.com</a>. Te escribimos para concretar.</p>
   </section>
 
 
@@ -172,7 +84,8 @@
     <p><a href="mailto:asambleatomasbreton@gmail.com">asambleatomasbreton@gmail.com</a></p>
   </section>
 
-  <section class="productos" id="productos">
+  <form id="form-apoyo" novalidate>
+<section class="productos" id="productos">
     <h2>Lo que hacemos</h2>
     <p class="provisional">Fotos y precios provisionales, tomados con permiso de la web de otra asamblea; la asamblea confirmará diseños y precios antes de abrir pedidos.</p>
     <div class="rejilla">
@@ -181,18 +94,42 @@
         <p class="precio">10 € <span class="provisional">(provisional)</span></p>
         <h3>Camisetas</h3>
         <p>La de siempre, la de la escuela pública. Tallas de adulto e infantil. <span class="provisional">Diseño por confirmar por la asamblea.</span></p>
+      <div class="pedir"><p class="pedir-titulo">Reservar camisetas · 10 € (provisional)</p><div class="tallas" data-producto="Camiseta">
+          <p class="grupo-talla">Adulto</p>
+          <label>S <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="adulto S"></label>
+          <label>M <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="adulto M"></label>
+          <label>L <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="adulto L"></label>
+          <label>XL <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="adulto XL"></label>
+          <label>XXL <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="adulto XXL"></label>
+        </div>
+        <div class="tallas" data-producto="Camiseta">
+          <p class="grupo-talla">Infantil</p>
+          <label>3-4 <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="infantil 3-4 años"></label>
+          <label>5-6 <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="infantil 5-6 años"></label>
+          <label>7-8 <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="infantil 7-8 años"></label>
+          <label>9-10 <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="infantil 9-10 años"></label>
+          <label>11-12 <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="infantil 11-12 años"></label>
+        </div></div>
       </article>
       <article class="producto sticker giro">
         <img src="assets/productos/sudadera.webp" alt="Sudadera verde de referencia con capucha y lema Escuela pública: de tod@s para tod@s">
         <p class="precio">20 €</p>
         <h3>Sudaderas</h3>
         <p>Sudaderas de apoyo a la escuela pública. <span class="provisional">Imagen de referencia. Diseño por confirmar por la asamblea.</span></p>
+      <div class="pedir"><p class="pedir-titulo">Reservar sudaderas · 20 €</p><div class="tallas" data-producto="Sudadera">
+          <label>Sudaderas <input type="number" min="0" max="99" value="0" data-precio="20" data-detalle="unidad"></label>
+        </div></div>
       </article>
       <article class="producto sticker giro">
         <img src="assets/productos/chapa-de-todas.webp" alt="Chapa de ejemplo con lema de apoyo">
         <p class="precio">2 € <span class="provisional">(provisional)</span></p>
         <h3>Chapas</h3>
         <p>Con lemas de apoyo a la escuela pública, para la solapa, la mochila o el carro. <span class="provisional">Modelos por confirmar.</span></p>
+      <div class="pedir"><p class="pedir-titulo">Reservar chapas · 2 € (provisional)</p><div class="tallas" data-producto="Chapa">
+          <label>Modelo 1 <input type="number" min="0" max="99" value="0" data-precio="2" data-detalle="modelo 1"></label>
+          <label>Modelo 2 <input type="number" min="0" max="99" value="0" data-precio="2" data-detalle="modelo 2"></label>
+          <label>Modelo 3 <input type="number" min="0" max="99" value="0" data-precio="2" data-detalle="modelo 3"></label>
+        </div></div>
       </article>
       <article class="producto sticker">
         <p class="precio">Próximamente a la venta</p>
@@ -202,10 +139,62 @@
       <article class="producto sticker giro">
         <p class="precio">10 €</p>
         <h3>Botellas</h3>
-        <p>Botellas reutilizables con lemas de apoyo a la escuela pública. <span class="provisional">Modelo por confirmar por la asamblea.</span></p>
+        <p>Botellas reutilizables de apoyo a la educación pública. <span class="provisional">Modelo por confirmar por la asamblea.</span></p>
+      <div class="pedir"><p class="pedir-titulo">Reservar botellas · 10 €</p><div class="tallas" data-producto="Botella">
+          <label>Botellas · 10 € <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="modelo por confirmar"></label>
+        </div></div>
       </article>
     </div>
   </section>
+    <section class="formulario" id="tus-datos">
+      <h2>Tus datos</h2>
+      <fieldset class="sin-borde">
+        <legend class="solo-lectores">Tus datos</legend>
+        <label class="campo">Nombre
+          <input type="text" name="nombre" required autocomplete="name">
+        </label>
+        <label class="campo">Correo electrónico
+          <input type="email" name="email" required autocomplete="email">
+        </label>
+        <label class="campo">Teléfono (opcional, si prefieres que te escribamos por WhatsApp)
+          <input type="tel" name="telefono" autocomplete="tel">
+        </label>
+        <label class="campo">Algo más que debamos saber (opcional)
+          <textarea name="comentario" rows="3"></textarea>
+        </label>
+        <label class="campo hp" aria-hidden="true">Empresa
+          <input type="text" name="empresa" tabindex="-1" autocomplete="off">
+        </label>
+      </fieldset>
+      <fieldset>
+        <legend>Papeletas del sorteo · 5 € (precio provisional)</legend>
+        <div class="tallas" data-producto="Papeleta del sorteo">
+          <label>Papeletas <input type="number" min="0" max="99" value="0" data-precio="5" data-detalle="sorteo de la cesta"></label>
+        </div>
+        <p class="nota">Las bases y la fecha del sorteo se añadirán cuando estén cerradas.</p>
+      </fieldset>
+      <fieldset>
+        <legend>Colaborar</legend>
+        <p class="nota">Hacer pancartas, ayudar con las propuestas, hacer donativos.</p>
+        <label class="campo check">
+          <input type="checkbox" id="quiero-donar"> Quiero colaborar
+        </label>
+      </fieldset>
+      <div class="resumen">
+        <h3>Tu selección</h3>
+        <p id="resumen-detalle">Todavía no has elegido nada.</p>
+        <p class="nota">Los precios marcados como provisionales se confirman por correo.</p>
+      </div>
+
+      <p class="nota">Usaremos tus datos solo para gestionar tu solicitud. Se guardan en una hoja de cálculo y un correo de Google de la asamblea (herramientas de Google, con sus propias condiciones) y no se publican en la web. Lee la <a href="privacidad.html">información de privacidad</a>.</p>
+      <label class="campo check">
+        <input type="checkbox" id="privacidad-ok" required> Acepto que la asamblea me escriba para gestionar mi solicitud.
+      </label>
+
+      <p id="estado-envio" class="estado" role="status"></p>
+      <button type="submit" class="boton">Enviar</button>
+    </section>
+</form>
 </main>
 
 <footer class="pie">
