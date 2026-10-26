@@ -94,3 +94,9 @@ legend{font-weight:700;padding:0 .3rem}
 #apoyar .tarjeta-enlace{position:absolute;inset:0;border-radius:1rem}
 #apoyar .tarjeta-enlace:focus-visible{outline:3px solid var(--verde-vivo);outline-offset:2px}
 #apoyar .producto a:not(.tarjeta-enlace){position:relative;z-index:1}
+
+.pedir{margin-top:.8rem;padding-top:.8rem;border-top:1px dashed var(--borde)}
+.pedir-titulo{font-weight:700;margin:0 0 .3rem}
+.sin-borde{border:0;padding:0}
+.solo-lectores{position:absolute;left:-9999px}
+.productos form,#form-apoyo{display:block}
