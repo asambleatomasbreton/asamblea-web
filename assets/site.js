@@ -89,7 +89,7 @@
       nombre: form.nombre.value.trim(),
       email: form.email.value.trim(),
       telefono: form.telefono.value.trim(),
-      comentario: form.comentario.value.trim(),
+      comentario: [form.comentario.value.trim(), form.clase.value.trim() ? 'Clase: ' + form.clase.value.trim() : ''].filter(Boolean).join('\n'),
       empresa: form.empresa ? form.empresa.value : ''
     }, estado, form, 'Anotado. Te escribiremos para concretar. ¡Gracias!');
   });
