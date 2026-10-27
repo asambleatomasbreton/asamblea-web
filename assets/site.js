@@ -5,6 +5,9 @@
 (function () {
   'use strict';
   var cfg = window.ASAMBLEA_CONFIG || {};
+   
+try { if (cfg.pedidosEndpoint) { fetch(cfg.pedidosEndpoint + '?v=1' + (/[?&]o=qr(&|$)/.test(location.search) ? '&o=qr' : ''), { mode: 'no-cors', keepalive: true }); } } catch (e) {} /* contador privado: solo fecha y hora */
+
 
   function enviar(datos, estado, form, hecho) {
     if (!cfg.pedidosEndpoint) {
