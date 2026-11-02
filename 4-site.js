@@ -9,7 +9,7 @@
 try { if (cfg.pedidosEndpoint) { fetch(cfg.pedidosEndpoint + '?v=1' + (/[?&]o=qr(&|$)/.test(location.search) ? '&o=qr' : ''), { mode: 'no-cors', keepalive: true }); } } catch (e) {} /* contador privado: solo fecha y hora */
 
 
-  function enviar(datos, estado, form, hecho) {
+  function enviar(datos, estado, form, hecho, hechoEspera) {
     if (!cfg.pedidosEndpoint) {
       estado.textContent = 'Modo demostración: este formulario todavía no envía nada. Falta conectar la hoja de pedidos (ver README).';
       estado.className = 'estado demo';
@@ -23,7 +23,7 @@ try { if (cfg.pedidosEndpoint) { fetch(cfg.pedidosEndpoint + '?v=1' + (/[?&]o=qr
       body: JSON.stringify(datos)
     }).then(function (r) { return r.json(); }).then(function (r) {
       if (r && r.ok) {
-        estado.textContent = hecho;
+        estado.textContent = (r.espera && hechoEspera) ? hechoEspera : hecho;
         estado.className = 'estado ok';
         form.reset();
         form.dispatchEvent(new Event('input', { bubbles: true }));
@@ -136,7 +136,7 @@ try { if (cfg.pedidosEndpoint) { fetch(cfg.pedidosEndpoint + '?v=1' + (/[?&]o=qr
           (pareja ? '; pareja: ' + parejaNombre + (parejaNivel ? '; nivel pareja: ' + parejaNivel : '') : '') +
           '; edad mínima 12 años confirmada',
         empresa: document.getElementById('padel-empresa') ? document.getElementById('padel-empresa').value : ''
-      }, estadoPadel, formPadel, 'Hemos recibido tu inscripción. La plaza se confirma con el pago presencial (20 € por persona), a la entrada o a la salida del colegio. ¡Gracias!');
+      }, estadoPadel, formPadel, 'Hemos recibido tu inscripción. La plaza se confirma con el pago presencial (20 € por persona), a la entrada o a la salida del colegio. ¡Gracias!', 'Gracias por tu inscripción. Entras en lista de espera. Si alguien cancela, te avisaremos si finalmente puedes jugar.');
     });
   }
 })();
