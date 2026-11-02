@@ -180,29 +180,7 @@
       </article>
     </div>
   </section>
-    <section class="formulario" id="inscripcion-padel">
-      <h2>Inscripción al torneo de pádel</h2>
-      <p>28 de noviembre · 11:30-13:30 h · Centro Deportivo Municipal Marqués de Samaranch.</p>
-      <p class="precio">20 € por persona</p>
-      <label class="campo check"><input type="checkbox" id="quiero-padel"> Quiero inscribirme al torneo de pádel</label>
-      <div id="padel-datos" hidden>
-        <label class="campo">Modalidad de inscripción
-          <select id="padel-modalidad"><option value="individual">Individual · 1 persona</option><option value="pareja">Por parejas · 2 personas</option></select>
-        </label>
-        <p class="nota">Usaremos el nombre y el contacto que indiques en «Tus datos».</p>
-        <label class="campo">Tu nivel de juego
-          <select id="padel-nivel"><option value="">Selecciona tu nivel</option><option>Alto</option><option>Medio</option><option>Bajo</option></select>
-        </label>
-        <div id="padel-pareja" hidden>
-          <label class="campo">Nombre de tu pareja de juego<input id="padel-pareja-nombre" type="text" maxlength="100" autocomplete="off"></label>
-          <label class="campo">Nivel de tu pareja de juego
-            <select id="padel-pareja-nivel"><option value="">Selecciona su nivel</option><option>Alto</option><option>Medio</option><option>Bajo</option></select>
-          </label>
-        </div>
-        <label class="campo check"><input type="checkbox" id="padel-edad"> Confirmo que todas las personas inscritas tienen al menos 12 años.</label>
-        <p class="nota">El torneo tiene un máximo de 10 parejas. Enviar la solicitud no confirma la plaza.</p>
-      </div>
-    </section>
+
     <section class="formulario" id="tus-datos">
       <h2>Tus datos</h2>
       <fieldset class="sin-borde">
@@ -249,6 +227,46 @@
       <button type="submit" class="boton">Enviar</button>
     </section>
 </form>
+  <form id="form-padel" novalidate>
+    <section class="formulario" id="inscripcion-padel">
+      <h2>Inscripción al torneo de pádel</h2>
+      <p>28 de noviembre · 11:30-13:30 h · Centro Deportivo Municipal Marqués de Samaranch.</p>
+      <p class="precio">20 € por persona</p>
+      <label class="campo">Modalidad de inscripción
+        <select id="padel-modalidad"><option value="individual">Individual · 1 persona</option><option value="pareja">Por parejas · 2 personas</option></select>
+      </label>
+      <label class="campo">Tu nivel de juego
+        <select id="padel-nivel"><option value="">Selecciona tu nivel</option><option>Alto</option><option>Medio</option><option>Bajo</option></select>
+      </label>
+      <div id="padel-pareja" hidden>
+        <label class="campo">Nombre de tu pareja de juego<input id="padel-pareja-nombre" type="text" maxlength="100" autocomplete="off"></label>
+        <label class="campo">Nivel de tu pareja de juego
+          <select id="padel-pareja-nivel"><option value="">Selecciona su nivel</option><option>Alto</option><option>Medio</option><option>Bajo</option></select>
+        </label>
+      </div>
+      <label class="campo check"><input type="checkbox" id="padel-edad"> Confirmo que todas las personas inscritas tienen al menos 12 años.</label>
+      <label class="campo">Nombre de la persona que se inscribe
+        <input id="padel-nombre" type="text" maxlength="100" autocomplete="name">
+      </label>
+      <label class="campo">Correo electrónico
+        <input id="padel-email" type="email" maxlength="100" autocomplete="email">
+      </label>
+      <label class="campo">Teléfono (opcional, si prefieres que te escribamos por WhatsApp)
+        <input id="padel-telefono" type="tel" maxlength="30" autocomplete="tel">
+      </label>
+      <label class="campo hp" aria-hidden="true">Empresa
+        <input id="padel-empresa" type="text" tabindex="-1" autocomplete="off">
+      </label>
+      <p class="nota">El torneo tiene un máximo de 10 parejas. Las inscripciones se confirman una vez efectuado el pago presencial, a la entrada o a la salida del colegio. Si lo prefieres, también puedes inscribirte en persona allí.</p>
+      <p class="nota">Usaremos tus datos solo para gestionar tu inscripción. Se guardan en una hoja de cálculo y un correo de Google de la asamblea (herramientas de Google, con sus propias condiciones) y no se publican en la web. Lee la <a href="privacidad.html">información de privacidad</a>.</p>
+      <label class="campo check">
+        <input type="checkbox" id="padel-privacidad-ok"> Acepto que la asamblea me escriba para gestionar mi inscripción.
+      </label>
+      <p class="nota">Si no te llega la confirmación, revisa tu correo no deseado o spam.</p>
+      <p id="padel-estado" class="estado" role="status"></p>
+      <button type="submit" class="boton" id="padel-enviar">Enviar inscripción</button>
+    </section>
+  </form>
 </main>
 
 <footer class="pie">
