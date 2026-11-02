@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex"><title>Asamblea Tomás Bretón · Apoya la escuela pública</title>
 <meta name="description" content="Web de la Asamblea Tomás Bretón: maestras y maestros del colegio. Reserva camisetas, sudaderas, chapas, mochilas y botellas, papeletas del sorteo de una cesta o haz un donativo.">
 <link rel="stylesheet" href="assets/style.css">
-<style>.productos .producto img{height:200px;object-fit:contain;background:#fff}.top .logo{display:block;width:84px;height:84px;border-radius:50%;margin:0 auto .55rem}</style>
+<style>.productos .producto img{height:200px;object-fit:contain;background:#fff}.top .logo{display:block;width:84px;height:84px;border-radius:50%;margin:0 auto .55rem} .campo select{display:block;width:100%;margin-top:.2rem;padding:.55rem;border:1px solid var(--borde);border-radius:.5rem;font:inherit;background:white;color:var(--tinta);min-height:44px}[hidden]{display:none!important}</style>
 </head>
 <body>
 <a class="saltar" href="#productos">Saltar al formulario</a>
@@ -26,6 +26,7 @@
       <a class="boton boton-sec" href="#peticiones">Saber más sobre la huelga</a>
     </div>
     <p style="margin:.9rem 0 0"><a class="boton boton-sec" href="merienda-por-la-publica.jpg" target="_blank" rel="noopener">Merienda con nosotros</a></p>
+    <p style="margin:.6rem 0 0"><a class="boton boton-sec" href="3-torneo-padel.html">Torneo de Pádel</a></p>
   </section>
 
   <section id="apoyar">
@@ -179,6 +180,29 @@
       </article>
     </div>
   </section>
+    <section class="formulario" id="inscripcion-padel">
+      <h2>Inscripción al torneo de pádel</h2>
+      <p>28 de noviembre · 11:30-13:30 h · Centro Deportivo Municipal Marqués de Samaranch.</p>
+      <p class="precio">20 € por persona</p>
+      <label class="campo check"><input type="checkbox" id="quiero-padel"> Quiero inscribirme al torneo de pádel</label>
+      <div id="padel-datos" hidden>
+        <label class="campo">Modalidad de inscripción
+          <select id="padel-modalidad"><option value="individual">Individual · 1 persona</option><option value="pareja">Por parejas · 2 personas</option></select>
+        </label>
+        <p class="nota">Usaremos el nombre y el contacto que indiques en «Tus datos».</p>
+        <label class="campo">Tu nivel de juego
+          <select id="padel-nivel"><option value="">Selecciona tu nivel</option><option>Alto</option><option>Medio</option><option>Bajo</option></select>
+        </label>
+        <div id="padel-pareja" hidden>
+          <label class="campo">Nombre de tu pareja de juego<input id="padel-pareja-nombre" type="text" maxlength="100" autocomplete="off"></label>
+          <label class="campo">Nivel de tu pareja de juego
+            <select id="padel-pareja-nivel"><option value="">Selecciona su nivel</option><option>Alto</option><option>Medio</option><option>Bajo</option></select>
+          </label>
+        </div>
+        <label class="campo check"><input type="checkbox" id="padel-edad"> Confirmo que todas las personas inscritas tienen al menos 12 años.</label>
+        <p class="nota">El torneo tiene un máximo de 10 parejas. Enviar la solicitud no confirma la plaza.</p>
+      </div>
+    </section>
     <section class="formulario" id="tus-datos">
       <h2>Tus datos</h2>
       <fieldset class="sin-borde">
@@ -233,6 +257,6 @@
 </footer>
 
 <script src="assets/config.js"></script>
-<script src="assets/site.js"></script>
+<script src="4-site.js"></script>
 </body>
 </html>
