@@ -26,6 +26,7 @@ try { if (cfg.pedidosEndpoint) { fetch(cfg.pedidosEndpoint + '?v=1' + (/[?&]o=qr
         estado.textContent = hecho;
         estado.className = 'estado ok';
         form.reset();
+        form.dispatchEvent(new Event('input', { bubbles: true }));
         resumen();
       } else { throw new Error((r && r.error) || 'error'); }
     }).catch(function () {
@@ -38,13 +39,6 @@ try { if (cfg.pedidosEndpoint) { fetch(cfg.pedidosEndpoint + '?v=1' + (/[?&]o=qr
   var estado = document.getElementById('estado-envio');
   var detalleEl = document.getElementById('resumen-detalle');
   var donativoEl = document.getElementById('quiero-donar');
-
-  var padelEl = document.getElementById('quiero-padel');
-  var modalidadEl = document.getElementById('padel-modalidad');
-  function actualizarPadel() {
-    document.getElementById('padel-datos').hidden = !padelEl.checked;
-    document.getElementById('padel-pareja').hidden = modalidadEl.value !== 'pareja';
-  }
 
   function lineas() {
     var out = [];
@@ -60,10 +54,6 @@ try { if (cfg.pedidosEndpoint) { fetch(cfg.pedidosEndpoint + '?v=1' + (/[?&]o=qr
         });
       });
     });
-    if (padelEl.checked) {
-      var pareja = modalidadEl.value === 'pareja';
-      out.push({ producto: 'Inscripción torneo de pádel', detalle: pareja ? 'Por parejas' : 'Individual', precio: 20, cantidad: pareja ? 2 : 1 });
-    }
     return out;
   }
 
@@ -72,7 +62,6 @@ try { if (cfg.pedidosEndpoint) { fetch(cfg.pedidosEndpoint + '?v=1' + (/[?&]o=qr
   }
 
   function resumen() {
-    actualizarPadel();
     var ls = lineas();
     var partes = ls.map(function (l) {
       return l.cantidad + ' × ' + l.producto + (l.detalle ? ' (' + l.detalle + ')' : '');
@@ -93,10 +82,7 @@ try { if (cfg.pedidosEndpoint) { fetch(cfg.pedidosEndpoint + '?v=1' + (/[?&]o=qr
     ev.preventDefault();
     var ls = lineas();
     var donativo = donativoEl.checked;
-    if (!ls.length && !donativo) { estado.textContent = 'Elige productos, inscripción al torneo o «Quiero colaborar».'; estado.className = 'estado error'; return; }
-    if (padelEl.checked && (!document.getElementById('padel-nivel').value || (modalidadEl.value === 'pareja' && !document.getElementById('padel-pareja-nivel').value))) { estado.textContent = 'Indica el nivel de juego de cada persona inscrita.'; estado.className = 'estado error'; return; }
-    if (padelEl.checked && modalidadEl.value === 'pareja' && !document.getElementById('padel-pareja-nombre').value.trim()) { estado.textContent = 'Indica el nombre de tu pareja de juego.'; estado.className = 'estado error'; return; }
-    if (padelEl.checked && !document.getElementById('padel-edad').checked) { estado.textContent = 'Confirma que todas las personas inscritas tienen al menos 12 años.'; estado.className = 'estado error'; return; }
+    if (!ls.length && !donativo) { estado.textContent = 'Elige productos o «Quiero colaborar».'; estado.className = 'estado error'; return; }
     if (!form.nombre.value.trim() || !form.email.value.trim()) { estado.textContent = 'Faltan tu nombre o tu correo.'; estado.className = 'estado error'; return; }
     if (!document.getElementById('privacidad-ok').checked) { estado.textContent = 'Marca la casilla para que podamos escribirte.'; estado.className = 'estado error'; return; }
     enviar({
@@ -107,11 +93,50 @@ try { if (cfg.pedidosEndpoint) { fetch(cfg.pedidosEndpoint + '?v=1' + (/[?&]o=qr
       nombre: form.nombre.value.trim(),
       email: form.email.value.trim(),
       telefono: form.telefono.value.trim(),
-      comentario: [padelEl.checked ? 'Pádel: ' + (modalidadEl.value === 'pareja' ? 'por parejas' : 'individual') +
-          (document.getElementById('padel-nivel').value ? '; nivel: ' + document.getElementById('padel-nivel').value : '') +
-          (modalidadEl.value === 'pareja' ? '; pareja: ' + document.getElementById('padel-pareja-nombre').value.trim() +
-            (document.getElementById('padel-pareja-nivel').value ? '; nivel pareja: ' + document.getElementById('padel-pareja-nivel').value : '') : '') + '; edad mínima 12 años confirmada' : '', form.comentario.value.trim(), form.clase.value.trim() ? 'Clase: ' + form.clase.value.trim() : ''].filter(Boolean).join('\n'),
+      comentario: [form.comentario.value.trim(), form.clase.value.trim() ? 'Clase: ' + form.clase.value.trim() : ''].filter(Boolean).join('\n'),
       empresa: form.empresa ? form.empresa.value : ''
     }, estado, form, 'Hemos procesado tu reserva. ¡Gracias!');
   });
+
+  /* Inscripción al torneo de pádel: formulario independiente del de productos.
+     Usa el mismo receptor y el mismo formato de envío. */
+  var formPadel = document.getElementById('form-padel');
+  if (formPadel) {
+    var modalidadEl = document.getElementById('padel-modalidad');
+    var estadoPadel = document.getElementById('padel-estado');
+    function actualizarPadel() {
+      document.getElementById('padel-pareja').hidden = modalidadEl.value !== 'pareja';
+    }
+    formPadel.addEventListener('input', actualizarPadel);
+    actualizarPadel();
+
+    formPadel.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var pareja = modalidadEl.value === 'pareja';
+      var nivel = document.getElementById('padel-nivel').value;
+      var parejaNivel = document.getElementById('padel-pareja-nivel').value;
+      var parejaNombre = document.getElementById('padel-pareja-nombre').value.trim();
+      var nombre = document.getElementById('padel-nombre').value.trim();
+      var email = document.getElementById('padel-email').value.trim();
+      if (!nivel || (pareja && !parejaNivel)) { estadoPadel.textContent = 'Indica el nivel de juego de cada persona inscrita.'; estadoPadel.className = 'estado error'; return; }
+      if (pareja && !parejaNombre) { estadoPadel.textContent = 'Indica el nombre de tu pareja de juego.'; estadoPadel.className = 'estado error'; return; }
+      if (!document.getElementById('padel-edad').checked) { estadoPadel.textContent = 'Confirma que todas las personas inscritas tienen al menos 12 años.'; estadoPadel.className = 'estado error'; return; }
+      if (!nombre || !email) { estadoPadel.textContent = 'Faltan el nombre de la persona que se inscribe o el correo.'; estadoPadel.className = 'estado error'; return; }
+      if (!document.getElementById('padel-privacidad-ok').checked) { estadoPadel.textContent = 'Marca la casilla para que podamos escribirte.'; estadoPadel.className = 'estado error'; return; }
+      enviar({
+        tipo: 'apoyo',
+        lineas: [{ producto: 'Inscripción torneo de pádel', detalle: pareja ? 'Por parejas' : 'Individual', precio: 20, cantidad: pareja ? 2 : 1 }],
+        donativo: false,
+        totalEstimado: pareja ? 40 : 20,
+        nombre: nombre,
+        email: email,
+        telefono: document.getElementById('padel-telefono').value.trim(),
+        comentario: 'Pádel: ' + (pareja ? 'por parejas' : 'individual') +
+          (nivel ? '; nivel: ' + nivel : '') +
+          (pareja ? '; pareja: ' + parejaNombre + (parejaNivel ? '; nivel pareja: ' + parejaNivel : '') : '') +
+          '; edad mínima 12 años confirmada',
+        empresa: document.getElementById('padel-empresa') ? document.getElementById('padel-empresa').value : ''
+      }, estadoPadel, formPadel, 'Hemos recibido tu inscripción. La plaza se confirma con el pago presencial (20 € por persona), a la entrada o a la salida del colegio. ¡Gracias!');
+    });
+  }
 })();
