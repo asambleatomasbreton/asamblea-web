@@ -40,11 +40,13 @@ try { if (cfg.pedidosEndpoint) { fetch(cfg.pedidosEndpoint + '?v=1' + (/[?&]o=qr
   var detalleEl = document.getElementById('resumen-detalle');
   var donativoEl = document.getElementById('quiero-donar');
 
+  var PAUSADOS = ['Camiseta', 'Sudadera', 'Papeleta del sorteo'];
   function lineas() {
     var out = [];
     document.querySelectorAll('.tallas[data-producto]').forEach(function (grupo) {
       var producto = grupo.getAttribute('data-producto');
       grupo.querySelectorAll('input[type="number"]').forEach(function (input) {
+        if (PAUSADOS.indexOf(producto) >= 0) { input.disabled = true; input.value = 0; return; }
         var n = parseInt(input.value, 10) || 0;
         if (n > 0) out.push({
           producto: producto,
