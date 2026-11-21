@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex"><title>Asamblea Tomás Bretón · Apoya la escuela pública</title>
 <meta name="description" content="Web de la Asamblea Tomás Bretón: maestras y maestros del colegio. Reserva camisetas, sudaderas, chapas, mochilas y botellas, papeletas del sorteo de una cesta o haz un donativo.">
 <link rel="stylesheet" href="assets/style.css">
-<style>.productos .producto img{height:200px;object-fit:contain;background:#fff}.top .logo{display:block;width:84px;height:84px;border-radius:50%;margin:0 auto .55rem} .campo select{display:block;width:100%;margin-top:.2rem;padding:.55rem;border:1px solid var(--borde);border-radius:.5rem;font:inherit;background:white;color:var(--tinta);min-height:44px}[hidden]{display:none!important}.hero-acciones{display:grid!important;grid-template-columns:1fr 1fr;gap:.6rem;max-width:34rem;margin:0 auto}.hero-acciones .boton{display:flex;align-items:center;justify-content:center;text-align:center;padding:.7rem .8rem;font-size:.95rem;border-radius:1rem;min-height:3.4rem}.tallas label.agotada{opacity:.9}.aviso-stock{font-size:.85rem;line-height:1.3;color:var(--gris);margin:.4rem 0}.tallas .nota-agotada{font-size:.7rem;line-height:1.15;color:var(--gris);text-align:center;max-width:4.8rem}</style>
+<style>.productos .producto img{height:200px;object-fit:contain;background:#fff}.top .logo{display:block;width:84px;height:84px;border-radius:50%;margin:0 auto .55rem} .campo select{display:block;width:100%;margin-top:.2rem;padding:.55rem;border:1px solid var(--borde);border-radius:.5rem;font:inherit;background:white;color:var(--tinta);min-height:44px}[hidden]{display:none!important}.hero-acciones{display:grid!important;grid-template-columns:1fr 1fr;gap:.6rem;max-width:34rem;margin:0 auto}.hero-acciones .boton{display:flex;align-items:center;justify-content:center;text-align:center;padding:.7rem .8rem;font-size:.95rem;border-radius:1rem;min-height:3.4rem}.tallas label.agotada{opacity:.9}.aviso-stock{font-size:.85rem;line-height:1.3;color:var(--gris);margin:.4rem 0}.tallas .nota-agotada{font-size:.7rem;line-height:1.15;color:var(--gris);text-align:center;max-width:4.8rem}.aviso-pausa{background:#fff3cd;border:2px solid #e0a800;border-radius:.8rem;padding:.8rem 1rem;margin:.8rem 0;color:#4a3b00;line-height:1.35}.pedir.pausado{opacity:.5;pointer-events:none}</style>
 </head>
 <body>
 <a class="saltar" href="#productos">Saltar al formulario</a>
@@ -96,6 +96,7 @@
   <form id="form-apoyo" novalidate>
 <section class="productos" id="productos">
     <h2>Lo que hacemos</h2>
+    <p class="aviso-pausa" role="alert"><strong>Pedidos de camisetas y sudaderas pausados temporalmente. Próximamente estarán de nuevo disponibles. ¡Gracias por vuestra paciencia!</strong></p>
     <p class="provisional">Fotos y precios provisionales, tomados con permiso de la web de otra asamblea; la asamblea confirmará los precios antes de abrir pedidos.</p>
     <div class="rejilla">
       <article class="producto sticker">
@@ -103,7 +104,7 @@
         <p class="precio">10 €</p>
         <h3>Camisetas</h3>
         <p>La de siempre, la de la escuela pública. Tallas de adulto e infantil.</p>
-      <div class="pedir"><p class="pedir-titulo">Reservar camisetas · 10 €</p><div class="tallas" data-producto="Camiseta">
+      <div class="pedir pausado"><p class="pedir-titulo">Reservar camisetas · 10 €</p><div class="tallas" data-producto="Camiseta">
           <p class="grupo-talla">Adulto</p>
           <label class="agotada">XS <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="adulto XS"><span class="nota-agotada">Fuera de stock temporalmente</span></label>
           <label>S <input type="number" min="0" max="99" value="0" data-precio="10" data-detalle="adulto S"></label>
@@ -135,7 +136,7 @@
         <p class="precio">20 €</p>
         <h3>Sudaderas</h3>
         <p>Sudaderas de apoyo a la escuela pública.</p>
-      <div class="pedir"><p class="pedir-titulo">Reservar sudaderas · 20 €</p><div class="tallas" data-producto="Sudadera">
+      <div class="pedir pausado"><p class="pedir-titulo">Reservar sudaderas · 20 €</p><div class="tallas" data-producto="Sudadera">
           <label class="agotada">XS <input type="number" min="0" max="99" value="0" data-precio="20" data-detalle="talla XS"><span class="nota-agotada">Fuera de stock temporalmente</span></label>
           <label class="agotada">S <input type="number" min="0" max="99" value="0" data-precio="20" data-detalle="talla S"><span class="nota-agotada">Fuera de stock temporalmente</span></label>
           <label class="agotada">M <input type="number" min="0" max="99" value="0" data-precio="20" data-detalle="talla M"><span class="nota-agotada">Fuera de stock temporalmente</span></label>
@@ -177,7 +178,7 @@
         <p class="precio">5 €</p>
         <h3>Papeletas para el sorteo</h3>
         <p>El sorteo se realizará el 26 de noviembre.</p>
-      <div class="pedir"><p class="pedir-titulo">Reservar papeletas · 5 €</p><div class="tallas" data-producto="Papeleta del sorteo">
+      <div class="pedir pausado"><p class="pedir-titulo">Reservar papeletas · 5 €</p><div class="tallas" data-producto="Papeleta del sorteo">
           <label>Papeletas <input type="number" min="0" max="99" value="0" data-precio="5" data-detalle="sorteo de la cesta"></label>
         </div></div>
       </article>
@@ -214,6 +215,7 @@
           <input type="checkbox" id="quiero-donar"> Quiero colaborar
         </label>
       </fieldset>
+      <p class="aviso-pausa" role="alert"><strong>Pedidos de camisetas y sudaderas pausados temporalmente. Próximamente estarán de nuevo disponibles. ¡Gracias por vuestra paciencia!</strong></p>
       <div class="resumen">
         <h3>Tu selección</h3>
         <p id="resumen-detalle">Todavía no has elegido nada.</p>
