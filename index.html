@@ -198,8 +198,15 @@
         <label class="campo">Teléfono (opcional, si prefieres que te escribamos por WhatsApp)
           <input type="tel" name="telefono" autocomplete="tel">
         </label>
-        <label class="campo">Clase de la niña o del niño (opcional)
-          <input type="text" name="clase" autocomplete="off">
+        <label class="campo">Familia de
+          <select name="familia-tipo" id="familia-tipo" required>
+            <option value="">Selecciona una opción</option>
+            <option value="nombre">Familia de un niño o niña del cole</option>
+            <option value="sin-hijos">No tengo hijos en el cole</option>
+          </select>
+        </label>
+        <label class="campo" id="familia-nombre-wrap" hidden>Nombre del niño o de la niña
+          <input type="text" name="familia" id="familia-de" autocomplete="off">
         </label>
         <label class="campo">Algo más que debamos saber (opcional)
           <textarea name="comentario" rows="3"></textarea>
