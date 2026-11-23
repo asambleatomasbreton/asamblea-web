@@ -77,6 +77,13 @@ try { if (cfg.pedidosEndpoint) { fetch(cfg.pedidosEndpoint + '?v=1' + (/[?&]o=qr
     detalleEl.textContent = partes.join(' · ') + (t > 0 ? ' — Total estimado: ' + t + ' € (precios provisionales)' : '');
   }
 
+  var tipoFamEl = document.getElementById('familia-tipo');
+  tipoFamEl.addEventListener('change', function () {
+    var pide = tipoFamEl.value === 'nombre';
+    document.getElementById('familia-nombre-wrap').hidden = !pide;
+    document.getElementById('familia-de').required = pide;
+    if (!pide) document.getElementById('familia-de').value = '';
+  });
   form.addEventListener('input', resumen);
   resumen();
 
@@ -85,6 +92,9 @@ try { if (cfg.pedidosEndpoint) { fetch(cfg.pedidosEndpoint + '?v=1' + (/[?&]o=qr
     var ls = lineas();
     var donativo = donativoEl.checked;
     if (!ls.length && !donativo) { estado.textContent = 'Elige productos o «Quiero colaborar».'; estado.className = 'estado error'; return; }
+    var tipoFam = document.getElementById('familia-tipo').value;
+    if (!tipoFam) { estado.textContent = 'Elige una opción en «Familia de».'; estado.className = 'estado error'; return; }
+    if (tipoFam === 'nombre' && !form.familia.value.trim()) { estado.textContent = 'Escribe el nombre del niño o de la niña.'; estado.className = 'estado error'; return; }
     if (!form.nombre.value.trim() || !form.email.value.trim()) { estado.textContent = 'Faltan tu nombre o tu correo.'; estado.className = 'estado error'; return; }
     if (!document.getElementById('privacidad-ok').checked) { estado.textContent = 'Marca la casilla para que podamos escribirte.'; estado.className = 'estado error'; return; }
     enviar({
@@ -95,7 +105,7 @@ try { if (cfg.pedidosEndpoint) { fetch(cfg.pedidosEndpoint + '?v=1' + (/[?&]o=qr
       nombre: form.nombre.value.trim(),
       email: form.email.value.trim(),
       telefono: form.telefono.value.trim(),
-      comentario: [form.comentario.value.trim(), form.clase.value.trim() ? 'Clase: ' + form.clase.value.trim() : ''].filter(Boolean).join('\n'),
+      comentario: [tipoFam === 'sin-hijos' ? 'Familia de: No tengo hijos en el cole' : 'Familia de: ' + form.familia.value.trim(), form.comentario.value.trim()].filter(Boolean).join('\n'),
       empresa: form.empresa ? form.empresa.value : ''
     }, estado, form, 'Hemos procesado tu reserva. ¡Gracias!');
   });
